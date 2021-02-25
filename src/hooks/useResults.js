@@ -24,8 +24,6 @@ export default () => {
     useEffect(() => {
         SearchApi('pasta');
     }, []);
+
+    return [SearchApi, results, errorMessage];
 }
-
-const styles = StyleSheet.create({
-
-});

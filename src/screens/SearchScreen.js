@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, Text } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, ScrollView } from 'react-native';
 import SearchBar from './components/SearchBar';
-import yelp from './api/yelp';
+import useResults from '../hooks/useResults';
+import ResultList from '../components/ResultList';
 
 const SearchScreen = () => {
     const [term, setTerm] = useState('');
+    const [SearchApi, results, errorMessage] = useResults();
 
+    const filterResultByPrice = (price) => {
+        return results.filter(result => result.price===price)
+    }
 
     return (
-        <View>
+        <>
             <SearchBar term={term}
                 onTermChange={newTerm => {
                     setTerm(newTerm);
@@ -20,12 +25,29 @@ const SearchScreen = () => {
                 null
             }
             <Text>We have found {results.length} results</Text>
-        </View>
+            <ScrollView>
+                <ResultList 
+                    results={filterResultByPrice('$')} 
+                    title="Cost Effective" 
+                    //navigation={navigation}    
+                />
+                <ResultList 
+                    results={filterResultByPrice('$$')} 
+                    title="Bit Pricer" 
+                    //navigation={navigation}  
+                />
+                <ResultList 
+                    results={filterResultByPrice('$$$')} 
+                    title="Bit Spender" 
+                    //navigation={navigation}      
+                />
+            </ScrollView>
+        </>
     )
 }
 
 const styles = StyleSheet.create({
-
+    
 });
 
 export default SearchScreen;
