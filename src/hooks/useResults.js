@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import yelp from './api/yelp';
+import yelp from '../api/yelp';
 
 export default () => {
     const [results, setResults] = useState([]);
@@ -11,7 +11,7 @@ export default () => {
                 params: {
                     limit: 50,
                     term: searchTerm,
-                    location: 'Bihar'
+                    location: 'san jose'
                 }
             });
             setResults(response.data.businesses);
