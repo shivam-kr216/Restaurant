@@ -6,6 +6,11 @@ import { withNavigation } from 'react-navigation';
 //Here we are directly accessing navigation without taking help from SearchScreen
 //This can be done using withNavigation
 const ResultList = ({ title, results, navigation }) => {
+
+    if(!results.length) {
+        return null;
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.titleStyle}>{title}</Text>
@@ -14,9 +19,9 @@ const ResultList = ({ title, results, navigation }) => {
                 data={results}
                 keyExtractor={(result) => result.id}
                 showsHorizontalScrollIndicator = {false}
-                renderItem = {({ item }) => {
+                renderItem = {({ item }) => { 
                     return (
-                        <TouchableOpacity onPress={() => navigation.navigate('ResultsShow')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('ResultsShow', { id: item.id })}>
                             <ResultsDetail result={item} />
                          </TouchableOpacity>
                     )

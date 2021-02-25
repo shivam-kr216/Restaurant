@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, ScrollView } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import SearchBar from './components/SearchBar';
 import useResults from '../hooks/useResults';
 import ResultList from '../components/ResultList';
@@ -9,7 +9,7 @@ const SearchScreen = () => {
     const [SearchApi, results, errorMessage] = useResults();
 
     const filterResultByPrice = (price) => {
-        return results.filter(result => result.price===price)
+        return results.filter(result => result.price === price)
     }
 
     return (
@@ -25,29 +25,27 @@ const SearchScreen = () => {
                 null
             }
             <Text>We have found {results.length} results</Text>
-            <ScrollView>
-                <ResultList 
-                    results={filterResultByPrice('$')} 
-                    title="Cost Effective" 
-                    //navigation={navigation}    
-                />
-                <ResultList 
-                    results={filterResultByPrice('$$')} 
-                    title="Bit Pricer" 
-                    //navigation={navigation}  
-                />
-                <ResultList 
-                    results={filterResultByPrice('$$$')} 
-                    title="Bit Spender" 
-                    //navigation={navigation}      
-                />
-            </ScrollView>
+            <ResultList
+                results={filterResultByPrice('$')}
+                title="Cost Effective"
+            //navigation={navigation}    
+            />
+            <ResultList
+                results={filterResultByPrice('$$')}
+                title="Bit Pricer"
+            //navigation={navigation}  
+            />
+            <ResultList
+                results={filterResultByPrice('$$$')}
+                title="Bit Spender"
+            //navigation={navigation}      
+            />
         </>
     )
 }
 
 const styles = StyleSheet.create({
-    
+
 });
 
 export default SearchScreen;
