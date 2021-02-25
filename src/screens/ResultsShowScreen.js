@@ -6,7 +6,6 @@ const ResultsShowScreen = ({ navigation }) => {
     const [result, setResult] = useState(null);
     //Used to fetch the id as a query-string from another page
     const id = navigation.getParam('id');
-    //console.log(id);
     const getResult = async (id) => {
         const response = await yelp.get(`/${id}`);
         setResult(response.data); 
